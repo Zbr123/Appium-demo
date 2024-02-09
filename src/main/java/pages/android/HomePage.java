@@ -8,7 +8,7 @@ import pages.Page;
 public class HomePage {
 
     String number;
-    private String Title_ClassName = "///hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout[1]/android.view.ViewGroup/android.widget.TextView";
+    private String Title_XPATH = "///hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout[1]/android.view.ViewGroup/android.widget.TextView";
     private String ImmediateButtonID = "com.meritnation.store.testingapp:id/btn1";
     private String VersionCodeID ="com.meritnation.store.testingapp:id/ver_name";
     private String VersionNameID ="com.meritnation.store.testingapp:id/ver_name";
@@ -21,7 +21,7 @@ public class HomePage {
     }
 
     public WebElement getTitle() {
-        return (AndroidDriverSetup.getAndroidDriver().findElement(By.className(Title_ClassName)));
+        return (AndroidDriverSetup.getAndroidDriver().findElement(By.xpath(Title_XPATH)));
     }
 
     public WebElement getVersionCode() {
