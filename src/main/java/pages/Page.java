@@ -11,7 +11,7 @@ public class Page {
     public static Properties myProp = ConfigUtil.getConfig("config");
     public static Properties androidconfig = ConfigUtil.getConfig("androidconfig");
 
-    private final HomePage homePage = new HomePage(this);
+    public HomePage homePage = new HomePage();
     protected HomePage getHomePage() {return homePage;}
     private final UpdatePage updatePage = new UpdatePage(this);
     protected UpdatePage getUpdatePage() {return updatePage;}

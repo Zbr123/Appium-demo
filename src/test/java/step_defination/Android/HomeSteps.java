@@ -1,39 +1,37 @@
 package step_defination.Android;
 
 import static com.codeborne.selenide.Selenide.*;
-
 import com.codeborne.selenide.Condition;
 import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-
-import org.openqa.selenium.WebDriver;
+import org.testng.Assert;
 import pages.Page;
-
 import java.util.List;
 import java.util.Map;
 
-
 public class HomeSteps extends Page {
-    @And("^\\[Home Page] User is on Home Page title 'Testing App'$")
-    public void UserIsOnHomePageTitleTestingApp() throws InterruptedException {
-        Thread.sleep(5000);
-        getHomePage().getTitle().isDisplayed();
+    @When("[Home Page] App should open successfully")
+    public void UserIsOnHomePageTitleTestingApp()  {
+        Assert.assertTrue(getHomePage().getTitle().isDisplayed());
     }
 
-    @And("^\\[Home Page] Verify the Version Code '106'$")
-    public void verifyTheCode() throws InterruptedException {
-        Thread.sleep(5000);
-        getHomePage().getVersionCode().isDisplayed();
+    @And("^\\[Home Page\\] Verify the Version Code (.*)$")
+    public void verifyTheCode(String versionCode) {
+        Assert.assertEquals(getHomePage().getVersionCode().getText(),versionCode,"Verify Version Code");
     }
 
-    @And("^\\[Home Page] Verify the Version Name '12.0'$")
-    public void verifyTheName() throws InterruptedException {
-        Thread.sleep(5000);
+    @And("^\\[Home Page\\] Verify the Version Name (.*)$")
+    public void verifyTheName(String versionName) {
+        Assert.assertEquals(getHomePage().getVersionName().getText(),versionName,"Verify Version Name");
         getHomePage().getVersionName().isDisplayed();
     }
 
+    @When("\\[Home Page\\] User tap on Button (.*)$")
+    public void homePageUserTapOnButtonXxx(String button) {
+        getHomePage().getButton(button).click();
+    }
 
     @Then("[Home Page] Verify the Immediate Update button is visible")
     public void homePageVerifyTheImmediateUpdateButtonIsVisible() {
@@ -46,34 +44,38 @@ public class HomeSteps extends Page {
     }
 
     @Then("[Home Page] Verify the three button options")
-    public void updatePageVerifyTheThreeButtonOptions(DataTable dataTable,String button) throws InterruptedException {
+    public void updatePageVerifyTheThreeButtonOptions(DataTable dataTable) throws InterruptedException {
         List<Map<String, String>> rows = dataTable.asMaps(String.class, String.class);
         for (Map<String, String> itemData : rows) {
             if (itemData.containsKey("Button1")) {
                 Thread.sleep(3000);
-                $(getHomePage().getButton(button)).shouldHave(Condition.exactText(itemData.get("Button1")));
+                $(getHomePage().getButton(String.valueOf(1))).shouldHave(Condition.exactText(itemData.get("Button1")));
             }
             if (itemData.containsKey("Button2")) {
                 Thread.sleep(3000);
-                $(getHomePage().getButton(button)).shouldHave(Condition.exactText(itemData.get("Button2")));
+                $(getHomePage().getButton(String.valueOf(2))).shouldHave(Condition.exactText(itemData.get("Button2")));
             }
             if (itemData.containsKey("Button3")) {
                 Thread.sleep(3000);
-                $(getHomePage().getButton(button)).shouldHave(Condition.exactText(itemData.get("Button3")));
+                $(getHomePage().getButton(String.valueOf(3))).shouldHave(Condition.exactText(itemData.get("Button3")));
             }
 
         }
     }
 
-    @When("[Home Page] User tap on Button (.*)")
-    public void homePageUserTapOnButtonXxx(String button) {
-        getHomePage().getButton(button).click();
-    }
-
-    @Then("[Home Page] Verify that Result 1 is visible")
-    public void homePageVerifyThatResul1IsVisible() {
-        getHomePage().getFirstResult().isDisplayed();
+    @Then("\\[Home Page\\] Verify that Result (.*) is displayed$")
+    public void homePageVerifyThatResul1IsVisible(String number) {
+        Assert.assertEquals(getHomePage().getResult().getText(),"RESULT "+number);
         getHomePage().backButton();
     }
 
+    @When("[Home Page] User tap on Flexible Update Button")
+    public void homePageUserTapOnFlexibleUpdateButton() {
+        getHomePage().getFlexibleButton().click();
+    }
+
+    @Then("[Home Page] Verify the Flexible Update button is visible")
+    public void homePageVerifyTheFlexibleUpdateButtonIsVisible() {
+        getHomePage().getFlexibleButton().isDisplayed();
+    }
 }

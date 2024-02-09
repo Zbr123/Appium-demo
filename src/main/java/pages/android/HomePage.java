@@ -1,61 +1,95 @@
 package pages.android;
 
-import core.utils.AndroidCore.AndroidDriverSetup;
+import io.appium.java_client.AppiumDriver;
+import io.appium.java_client.MobileElement;
+import io.appium.java_client.android.AndroidDriver;
+import io.appium.java_client.remote.AndroidMobileCapabilityType;
+import io.appium.java_client.remote.MobileCapabilityType;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
-import pages.Page;
+import org.openqa.selenium.remote.DesiredCapabilities;
+import java.net.MalformedURLException;
+import java.net.URL;
+
+import static pages.Page.androidconfig;
 
 public class HomePage {
 
-    String number;
-    private String Title_XPATH = "///hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout[1]/android.view.ViewGroup/android.widget.TextView";
-    private String ImmediateButtonID = "com.meritnation.store.testingapp:id/btn1";
-    private String VersionCodeID ="com.meritnation.store.testingapp:id/ver_name";
-    private String VersionNameID ="com.meritnation.store.testingapp:id/ver_name";
-    private String FirstButtonID ="com.meritnation.store.testingapp:id/btn";
-    private String SecondButtonID ="com.meritnation.store.testingapp:id/btn2";
-    private String ThirdButtonID ="com.meritnation.store.testingapp:id/btn3";
-    private String FirstResult ="com.meritnation.store.testingapp:id/txt";
+    private static AppiumDriver<MobileElement> driver;
+    private String titleXpath = "//android.view.ViewGroup/android.widget.TextView";
+    private String immediateButtonID = "com.meritnation.store.testingapp:id/btn1";
+    private String flexibleButtonID = "com.meritnation.store.testingapp:id/btn2";
+    private String versionCodeID ="com.meritnation.store.testingapp:id/ver_code";
+    private String versionNameID ="com.meritnation.store.testingapp:id/ver_name";
+    private String resultText ="com.meritnation.store.testingapp:id/txt";
 
-    public HomePage(Page page) {
+    public HomePage() {
+        if (driver == null) {
+            initializeDriver();
+        }
     }
 
-    public WebElement getTitle() {
-        return (AndroidDriverSetup.getAndroidDriver().findElement(By.xpath(Title_XPATH)));
+    private void initializeDriver() {
+        String appDir = System.getProperty("user.dir") + "/apk/";
+        DesiredCapabilities caps = new DesiredCapabilities();
+        caps.setCapability(MobileCapabilityType.PLATFORM_NAME, androidconfig.getProperty("platformName"));
+        caps.setCapability(MobileCapabilityType.PLATFORM_VERSION, androidconfig.getProperty("platformVersion"));
+        caps.setCapability(MobileCapabilityType.DEVICE_NAME, androidconfig.getProperty("deviceName"));
+        caps.setCapability(MobileCapabilityType.AUTOMATION_NAME, androidconfig.getProperty("automationName"));
+        caps.setCapability(MobileCapabilityType.APP, appDir + androidconfig.getProperty("androidapk"));
+        caps.setCapability(AndroidMobileCapabilityType.AUTO_GRANT_PERMISSIONS, "true");
+        caps.setCapability(MobileCapabilityType.ACCEPT_INSECURE_CERTS, "true");
+        caps.setCapability(MobileCapabilityType.FULL_RESET, "true");
+        caps.setCapability(MobileCapabilityType.NO_RESET, "false");
+
+        try {
+            driver = new AndroidDriver<>(new URL("http://127.0.0.1:4723/wd/hub"), caps);
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
     }
 
-    public WebElement getVersionCode() {
-        return (AndroidDriverSetup.getAndroidDriver().findElement(By.id(VersionCodeID)));
+    public MobileElement getTitle() {
+        return driver.findElement(By.xpath(titleXpath));
     }
 
-    public WebElement getVersionName() {
-        return (AndroidDriverSetup.getAndroidDriver().findElement(By.id(VersionNameID)));
+    public MobileElement getVersionCode() {
+        return driver.findElement(By.id(versionCodeID));
     }
 
-    public WebElement getImmediateButton() {
-        return (AndroidDriverSetup.getAndroidDriver().findElement(By.id(ImmediateButtonID)));
+    public MobileElement getVersionName() {
+        return driver.findElement(By.id(versionNameID));
     }
 
-    public WebElement getFirstButton() {
-        return (AndroidDriverSetup.getAndroidDriver().findElement(By.id(FirstButtonID)));
+    public MobileElement getButton(String button) {
+        return driver.findElement(By.id("com.meritnation.store.testingapp:id/btn" + button));
     }
 
-    public WebElement getSecondButton() {
-        return (AndroidDriverSetup.getAndroidDriver().findElement(By.id(SecondButtonID)));
+    public MobileElement getImmediateButton() {
+        return driver.findElement(By.id(immediateButtonID));
     }
 
-    public WebElement getThirdButton() {
-        return (AndroidDriverSetup.getAndroidDriver().findElement(By.id(ThirdButtonID)));
+    public MobileElement getFlexibleButton() {
+        return driver.findElement(By.id(flexibleButtonID));
     }
 
-    public WebElement getFirstResult() {
-        return (AndroidDriverSetup.getAndroidDriver().findElement(By.id(FirstResult)));
+    public MobileElement getResult() {
+        return driver.findElement(By.id(resultText));
     }
+
     public void backButton() {
-         AndroidDriverSetup.getAndroidDriver().navigate().back();
+        driver.navigate().back();
     }
 
-    public WebElement getButton(String button) {
-        return (AndroidDriverSetup.getAndroidDriver().findElement(By.id("com.meritnation.store.testingapp:id/btn"+button)));
+    public static void main(String[] args) {
+        HomePage homePage = new HomePage();
+
+        // Example actions using the HomePage
+        MobileElement titleElement = homePage.getTitle();
+        System.out.println("Title: " + titleElement.getText());
+
+        // Perform more actions as per your test requirements...
+
+        // Close the app or driver session at the end of your tests
+        driver.quit();
     }
 }
