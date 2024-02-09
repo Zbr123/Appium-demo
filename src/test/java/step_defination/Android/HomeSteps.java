@@ -29,7 +29,7 @@ public class HomeSteps extends Page {
     }
 
     @When("\\[Home Page\\] User tap on Button (.*)$")
-    public void homePageUserTapOnButtonXxx(String button) {
+    public void homePageUserTapOnButtonXxx(int button) {
         getHomePage().getButton(button).click();
     }
 
@@ -43,6 +43,21 @@ public class HomeSteps extends Page {
         getHomePage().getImmediateButton().click();
     }
 
+//    @Then("[Home Page] Verify the three button options")
+//    public void updatePageVerifyTheThreeButtonOptions(DataTable dataTable) {
+//        List<Map<String, String>> rows = dataTable.asMaps(String.class, String.class);
+//        for (Map<String, String> itemData : rows) {
+//            if (itemData.containsKey("Button1")) {
+//                $(getHomePage().getButton(1)).shouldHave(Condition.exactText(itemData.get("Button1")));
+//            }
+//            if (itemData.containsKey("Button2")) {
+//                $(getHomePage().getButton(2)).shouldHave(Condition.exactText(itemData.get("Button2")));
+//            }
+//            if (itemData.containsKey("Button3")) {
+//                $(getHomePage().getButton(3)).shouldHave(Condition.exactText(itemData.get("Button3")));
+//            }
+//        }
+//    }
 
     @Then("\\[Home Page\\] Verify that Result (.*) is displayed$")
     public void homePageVerifyThatResul1IsVisible(String number) {

@@ -5,7 +5,7 @@ import org.junit.runner.RunWith;
         glue = {"src/test/java/step_defination"},
         plugin = { "pretty", "html:target/cucumber-reports" },
         monochrome = true,
-        tags = "@homePage")
+        tags = "@android")
 
 public class MobileRunner {
 }

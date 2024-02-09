@@ -29,7 +29,7 @@ public class HomePage {
         return (AndroidDriverSetup.getAndroidDriver().findElement(By.id(versionNameID)));
     }
 
-    public WebElement getButton(String num) {
+    public WebElement getButton(int num) {
         return (AndroidDriverSetup.getAndroidDriver().findElement(By.id("com.meritnation.store.testingapp:id/btn"+num)));
     }
 
