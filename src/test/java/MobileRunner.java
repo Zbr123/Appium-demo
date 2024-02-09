@@ -1,14 +1,11 @@
-import io.cucumber.junit.Cucumber;
-import io.cucumber.junit.CucumberOptions;
+import io.cucumber.testng.CucumberOptions;
 import org.junit.runner.RunWith;
-
-@RunWith(Cucumber.class)
-@CucumberOptions(
-        features = {"src/test/resources/features/app/android/HomePage.feature"},
-        glue = {"step_defination"},
+@RunWith(io.cucumber.junit.Cucumber.class)
+@CucumberOptions(features = {"src/test/resources/features.app.android/HomePage.feature"},
+        glue = {"src/test/java/step_defination"},
         plugin = { "pretty", "html:target/cucumber-reports" },
         monochrome = true,
-        tags = "@homePage"
-)
+        tags = "@homePage")
+
 public class MobileRunner {
 }

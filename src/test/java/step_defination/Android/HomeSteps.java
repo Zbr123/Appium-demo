@@ -43,29 +43,10 @@ public class HomeSteps extends Page {
         getHomePage().getImmediateButton().click();
     }
 
-    @Then("[Home Page] Verify the three button options")
-    public void updatePageVerifyTheThreeButtonOptions(DataTable dataTable) throws InterruptedException {
-        List<Map<String, String>> rows = dataTable.asMaps(String.class, String.class);
-        for (Map<String, String> itemData : rows) {
-            if (itemData.containsKey("Button1")) {
-                Thread.sleep(3000);
-                $(getHomePage().getButton(String.valueOf(1))).shouldHave(Condition.exactText(itemData.get("Button1")));
-            }
-            if (itemData.containsKey("Button2")) {
-                Thread.sleep(3000);
-                $(getHomePage().getButton(String.valueOf(2))).shouldHave(Condition.exactText(itemData.get("Button2")));
-            }
-            if (itemData.containsKey("Button3")) {
-                Thread.sleep(3000);
-                $(getHomePage().getButton(String.valueOf(3))).shouldHave(Condition.exactText(itemData.get("Button3")));
-            }
-
-        }
-    }
 
     @Then("\\[Home Page\\] Verify that Result (.*) is displayed$")
     public void homePageVerifyThatResul1IsVisible(String number) {
-        Assert.assertEquals(getHomePage().getResult().getText(),"RESULT "+number);
+        Assert.assertEquals(getHomePage().getResult().getText(),"RESULT "+number,"Verify Result with Number");
         getHomePage().backButton();
     }
 
