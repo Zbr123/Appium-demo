@@ -1,7 +1,0 @@
-core/utils/ConfigUtil.class
-pages/android/HomePage.class
-pages/Page.class
-core/utils/AndroidCore/AndroidDriverSetup.class
-core/utils/AndroidCore/AppiumServerRunner.class
-core/utils/AndroidCore/CapabilitiesGenerator.class
-pages/android/UpdatePage.class

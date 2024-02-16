@@ -17,6 +17,7 @@ public class HomePage {
     private String getTitle = "//android.widget.TextView[@text='The App']";
     private String TextFieldDemoApp = "messageInput";
     private String getSaveButton = "//android.view.ViewGroup[@content-desc='messageSaveBtn']/android.widget.TextView";
+    private String chromeSearch = "q";
 
 
     public HomePage(Page page) {
@@ -81,5 +82,9 @@ public class HomePage {
     public void scrollToElementWithAccessibilityId(String accessibilityId) {
         String uiAutomatorString = String.format("new UiScrollable(new UiSelector().scrollable(true)).scrollIntoView(new UiSelector().description(\"%s\"))", accessibilityId);
         AndroidDriverSetup.getAndroidDriver().findElement(MobileBy.AndroidUIAutomator(uiAutomatorString));
+    }
+
+    public WebElement getChromeSearchDemoApp() {
+        return AndroidDriverSetup.getAndroidDriver().findElement(By.xpath("//android.view.View[2]/android.view.View[2]/android.view.View[1]/android.view.View[1]/android.widget.EditText"));
     }
 }

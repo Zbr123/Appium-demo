@@ -84,3 +84,5 @@ Feature: Home Page Testing App
   @android @final
   Scenario: Should open chrome and navigate to google.com
     Given I navigate to https://www.google.com
+    And I wait 10 seconds
+    And I search for Appium automation on chrome

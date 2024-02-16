@@ -8,8 +8,7 @@ import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import org.openqa.selenium.Alert;
-import org.openqa.selenium.NoAlertPresentException;
+import org.openqa.selenium.*;
 import org.testng.Assert;
 import pages.Page;
 
@@ -161,5 +160,16 @@ public class HomeSteps extends Page {
     @When("^I navigate to (.*)$")
     public void iNavigateToXxx(String url) {
         AndroidDriverSetup.getAndroidDriver().get(url);
+    }
+
+    @When("^I search for (.*) on chrome$")
+    public void iSearchFor(String query) {
+        // Assuming Google's search input field has a name attribute "q"
+
+        getHomePage().getChromeSearchDemoApp().click();
+        getHomePage().getChromeSearchDemoApp().sendKeys(query);
+
+        // Submit the search. This can also be done by sending ENTER/RETURN key
+//        getHomePage().getChromeSearchDemoApp().sendKeys(Keys.ENTER);
     }
 }
