@@ -11,7 +11,7 @@ public class AndroidDriverSetup {
 
     public static synchronized void androidDriver(String port) throws IOException {
         AndroidDriver<AndroidElement> driver;
-            driver = new AndroidDriver<AndroidElement>(new URL("http://0.0.0.0:" + port + "/wd/hub"), CapabilitiesGenerator.getAndroidCapabilities());
+            driver = new AndroidDriver<AndroidElement>(new URL("http://0.0.0.0:" + port + "/wd/hub"), CapabilitiesGenerator.getAndroidBrowserCapabilities());
             driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
         androidDriver.set(driver);
         System.out.println("Android driver selected:\n");

@@ -157,4 +157,9 @@ public class HomeSteps extends Page {
             System.err.println("Wait was interrupted.");
         }
     }
+
+    @When("^I navigate to (.*)$")
+    public void iNavigateToXxx(String url) {
+        AndroidDriverSetup.getAndroidDriver().get(url);
+    }
 }
