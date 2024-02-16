@@ -4,6 +4,7 @@ import io.appium.java_client.remote.AndroidMobileCapabilityType;
 import io.appium.java_client.remote.MobileCapabilityType;
 import io.cucumber.java.Scenario;
 import org.openqa.selenium.remote.DesiredCapabilities;
+
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.util.Collection;
@@ -32,6 +33,19 @@ public class CapabilitiesGenerator {
         cap.setCapability(MobileCapabilityType.ACCEPT_INSECURE_CERTS, "true");
         cap.setCapability(MobileCapabilityType.FULL_RESET, "true");
         cap.setCapability(MobileCapabilityType.NO_RESET, "false");
+        return cap;
+    }
+
+    public static DesiredCapabilities getAndroidBrowserCapabilities() throws IOException {
+        DesiredCapabilities cap = new DesiredCapabilities();
+        cap.setCapability(MobileCapabilityType.PLATFORM_NAME, androidconfig.getProperty("platformName"));
+        cap.setCapability(MobileCapabilityType.PLATFORM_VERSION, androidconfig.getProperty("platformVersion"));
+        cap.setCapability(MobileCapabilityType.DEVICE_NAME, androidconfig.getProperty("deviceName"));
+        cap.setCapability(MobileCapabilityType.BROWSER_NAME, "Chrome");
+        cap.setCapability(MobileCapabilityType.AUTOMATION_NAME, androidconfig.getProperty("automationName"));
+        cap.setCapability(AndroidMobileCapabilityType.AUTO_GRANT_PERMISSIONS, true);
+        cap.setCapability(MobileCapabilityType.ACCEPT_INSECURE_CERTS, true);
+        cap.setCapability("chromedriverExecutable", "C:\\Users\\syedz\\Desktop\\Appium-demo\\chromedriver.exe");
         return cap;
     }
 }
