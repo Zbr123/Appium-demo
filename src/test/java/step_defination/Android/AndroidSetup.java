@@ -1,12 +1,18 @@
 package step_defination.Android;
 
+import core.utils.AndroidCore.AndroidDriverSetup;
 import core.utils.AndroidCore.CapabilitiesGenerator;
-import io.cucumber.java.*;
+import io.appium.java_client.android.AndroidDriver;
+import io.cucumber.java.After;
+import io.cucumber.java.Before;
+import io.cucumber.java.Scenario;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 
 import java.io.IOException;
 import java.util.Collection;
 
-import static core.utils.AndroidCore.AndroidDriverSetup.androidDriver;
+import static core.utils.AndroidCore.AndroidDriverSetup.getAndroidDriver;
 import static core.utils.AndroidCore.AndroidDriverSetup.quitAndroidDriver;
 import static core.utils.AndroidCore.AppiumServerRunner.StartAppiumServer;
 import static pages.Page.myProp;
@@ -24,8 +30,8 @@ public class AndroidSetup {
         switch (PLATFORM_NAME) {
             case "android":
                 if (tags.contains("@android")) {
-                        StartAppiumServer(PORT);
-                         androidDriver(PORT);
+                    StartAppiumServer(PORT);
+                    AndroidDriverSetup.androidDriver(PORT);
                 }
                 break;
             default:
@@ -35,15 +41,15 @@ public class AndroidSetup {
 
     @After
     public void tearDown(Scenario scenario) {
-        switch (PLATFORM_NAME) {
-            case "android":
-                if (CapabilitiesGenerator.tags.get().contains("@final")) {
-                    quitAndroidDriver();
-                }
-                break;
-            default:
-                throw new IllegalStateException("Please enter valid OS platform.");
+        if (scenario.isFailed()) {
+            // Take a screenshot if the scenario fails
+            final byte[] screenshot = ((TakesScreenshot) getAndroidDriver()).getScreenshotAs(OutputType.BYTES);
+            scenario.attach(screenshot, "image/png", "screenshot");
+        }
+
+        // Quit the Android driver if the "@final" tag is present
+        if (CapabilitiesGenerator.tags.get().contains("@final")) {
+            quitAndroidDriver();
         }
     }
-
 }
