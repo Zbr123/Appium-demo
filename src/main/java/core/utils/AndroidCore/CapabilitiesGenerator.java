@@ -1,9 +1,11 @@
 package core.utils.AndroidCore;
 
+import core.utils.BsDeviceHelper;
 import io.appium.java_client.remote.AndroidMobileCapabilityType;
 import io.appium.java_client.remote.MobileCapabilityType;
 import io.cucumber.java.Scenario;
 import org.openqa.selenium.remote.DesiredCapabilities;
+
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.util.Collection;
@@ -21,7 +23,7 @@ public class CapabilitiesGenerator {
     }
 
     public static DesiredCapabilities getAndroidCapabilities() throws IOException {
-        String appDir = System.getProperty("user.dir") + "/apk/";
+        String appDir = System.getProperty("user.dir") + "/APK/";
         DesiredCapabilities cap = new DesiredCapabilities();
         cap.setCapability(MobileCapabilityType.PLATFORM_NAME, androidconfig.getProperty("platformName"));
         cap.setCapability(MobileCapabilityType.PLATFORM_VERSION, androidconfig.getProperty("platformVersion"));
@@ -34,4 +36,23 @@ public class CapabilitiesGenerator {
         cap.setCapability(MobileCapabilityType.NO_RESET, "false");
         return cap;
     }
+
+public static DesiredCapabilities getBrowserStackCapabilities() {
+    DesiredCapabilities caps = new DesiredCapabilities();
+    String device = BsDeviceHelper.getAvailableDevice();
+    caps.setCapability("device", device.split("@")[0]);
+    caps.setCapability("os_version", device.split("@")[1]);
+    caps.setCapability("platformName", System.getenv("PLATFORM_NAME"));
+    caps.setCapability("autoGrantPermissions", "true");
+    caps.setCapability("app", App);
+    caps.setCapability("project", "Vimient");
+    caps.setCapability("name", tags.get() + scenario.get().getName());
+    caps.setCapability("build", System.getenv("BROWSERSTACK_BUILD_NAME"));
+    caps.setCapability("browserstack.local", "true");
+    caps.setCapability("disableAnimations", "true");
+
+
+    return caps;
+}
+
 }
