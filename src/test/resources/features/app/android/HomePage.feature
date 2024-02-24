@@ -36,16 +36,16 @@ Feature: Home Page Testing App
     Given [Home Page] App should open successfully
     Then [Home Page] Verify that The App title is displayed on home page
 
-#  @android @final
-#  Scenario: Should be able to navigate through different tabs
-#    Given [Home Page] App should open successfully
-#    When I tap on Echo Box tab
-#    And I press back button
-#    When I tap on Login Screen tab
-#    And I press back button
-#    When I tap on Clipboard Demo tab
-#    And I press back button
-#    Then [Home Page] Verify that The App title is displayed on home page
+  @android @final
+  Scenario: Should be able to navigate through different tabs
+    Given [Home Page] App should open successfully
+    When I tap on Echo Box tab
+    And I press back button
+    When I tap on Login Screen tab
+    And I press back button
+    When I tap on Clipboard Demo tab
+    And I press back button
+    Then [Home Page] Verify that The App title is displayed on home page
 #
 #
 #  @android @final
