@@ -22,36 +22,35 @@ public class CapabilitiesGenerator {
         return s.getLocalPort();
     }
 
-    public static DesiredCapabilities getAndroidCapabilities() throws IOException {
-        String appDir = System.getProperty("user.dir") + "/APK/";
-        DesiredCapabilities cap = new DesiredCapabilities();
-        cap.setCapability(MobileCapabilityType.PLATFORM_NAME, androidconfig.getProperty("platformName"));
-        cap.setCapability(MobileCapabilityType.PLATFORM_VERSION, androidconfig.getProperty("platformVersion"));
-        cap.setCapability(MobileCapabilityType.DEVICE_NAME, androidconfig.getProperty("deviceName"));
-        cap.setCapability(MobileCapabilityType.AUTOMATION_NAME, androidconfig.getProperty("automationName"));
-        cap.setCapability(MobileCapabilityType.APP, appDir + androidconfig.getProperty("androidapk"));
-        cap.setCapability(AndroidMobileCapabilityType.AUTO_GRANT_PERMISSIONS, "true");
-        cap.setCapability(MobileCapabilityType.ACCEPT_INSECURE_CERTS, "true");
-        cap.setCapability(MobileCapabilityType.FULL_RESET, "true");
-        cap.setCapability(MobileCapabilityType.NO_RESET, "false");
-        return cap;
-    }
+//    public static DesiredCapabilities getAndroidCapabilities() throws IOException {
+//        String appDir = System.getProperty("user.dir") + "/APK/";
+//        DesiredCapabilities cap = new DesiredCapabilities();
+//        cap.setCapability(MobileCapabilityType.PLATFORM_NAME, androidconfig.getProperty("platformName"));
+//        cap.setCapability(MobileCapabilityType.PLATFORM_VERSION, androidconfig.getProperty("platformVersion"));
+//        cap.setCapability(MobileCapabilityType.DEVICE_NAME, androidconfig.getProperty("deviceName"));
+//        cap.setCapability(MobileCapabilityType.AUTOMATION_NAME, androidconfig.getProperty("automationName"));
+//        cap.setCapability(MobileCapabilityType.APP, appDir + androidconfig.getProperty("androidapk"));
+//        cap.setCapability(AndroidMobileCapabilityType.AUTO_GRANT_PERMISSIONS, "true");
+//        cap.setCapability(MobileCapabilityType.ACCEPT_INSECURE_CERTS, "true");
+//        cap.setCapability(MobileCapabilityType.FULL_RESET, "true");
+//        cap.setCapability(MobileCapabilityType.NO_RESET, "false");
+//        return cap;
+//    }
 
-public static DesiredCapabilities getBrowserStackCapabilities() {
+public static DesiredCapabilities getBrowserStackCapabilitiesx() {
+    String appDir = System.getProperty("user.dir") + "/apk/";
     DesiredCapabilities caps = new DesiredCapabilities();
     String device = BsDeviceHelper.getAvailableDevice();
-    caps.setCapability("device", device.split("@")[0]);
-    caps.setCapability("os_version", device.split("@")[1]);
-    caps.setCapability("platformName", System.getenv("PLATFORM_NAME"));
+    caps.setCapability("device", androidconfig.getProperty("browserstackDevice"));
+    caps.setCapability("os_version", androidconfig.getProperty("browserstackOS"));
+    caps.setCapability("platformName", androidconfig.getProperty("platformName"));
     caps.setCapability("autoGrantPermissions", "true");
-    caps.setCapability("app", App);
-    caps.setCapability("project", "Vimient");
-    caps.setCapability("name", tags.get() + scenario.get().getName());
-    caps.setCapability("build", System.getenv("BROWSERSTACK_BUILD_NAME"));
-    caps.setCapability("browserstack.local", "true");
-    caps.setCapability("disableAnimations", "true");
-
-
+    caps.setCapability("app",  androidconfig.getProperty("androidapk"));
+    caps.setCapability("project", "Test App");
+//    caps.setCapability("name", tags.get() + scenario.get().getName());
+//    caps.setCapability("build", System.getenv("BROWSERSTACK_BUILD_NAME"));
+//    caps.setCapability("browserstack.local", "true");
+//    caps.setCapability("disableAnimations", "true");
     return caps;
 }
 

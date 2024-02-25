@@ -24,9 +24,9 @@ public class AndroidDriverSetup {
     public static synchronized void androidDriver(String port) throws IOException {
         AndroidDriver<AndroidElement> driver;
         if (isBrowserStack)
-        driver = new AndroidDriver<AndroidElement>(new URL(BROWSERSTACK_URL), CapabilitiesGenerator.getBrowserStackCapabilities());
+        driver = new AndroidDriver<AndroidElement>(new URL(BROWSERSTACK_URL), CapabilitiesGenerator.getBrowserStackCapabilitiesx());
         else {
-            driver = new AndroidDriver<AndroidElement>(new URL("http://0.0.0.0:" + port + "/wd/hub"), CapabilitiesGenerator.getAndroidCapabilities());
+            driver = new AndroidDriver<AndroidElement>(new URL("http://0.0.0.0:" + port + "/wd/hub"), CapabilitiesGenerator.getBrowserStackCapabilitiesx());
             driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
         }
         androidDriver.set(driver);

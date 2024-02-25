@@ -1,6 +1,6 @@
 Feature: Home Page Testing App
 
-# @android @final
+# @android  @test
 #  Scenario: Verify the version code and version name display on home page
 #    Given [Home Page] App should open successfully
 #    Then  [Home Page] Verify the Version Code version code : 106
@@ -31,7 +31,7 @@ Feature: Home Page Testing App
 #    Then [Home Page] Verify that Result 3 is displayed
 
 
-  @android @final
+  @android @test @final
   Scenario: Verify the app opens and see home screen
     Given [Home Page] App should open successfully
     Then [Home Page] Verify that The App title is displayed on home page
