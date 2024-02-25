@@ -82,7 +82,7 @@ public class HomeSteps extends Page {
 
     @Then("[Home Page] Verify that The App title is displayed on home page")
     public void homePageVerifyThatTheAppTitleIsDisplayedOnHomePage() {
-        Assert.assertEquals(getHomePage().getTitleDemoApp().getText(), "The Apvp", "Verify Result");
+        Assert.assertEquals(getHomePage().getTitleDemoApp().getText(), "The App", "Verify Result");
     }
 
     @When("^I tap on (.*) tab$")
